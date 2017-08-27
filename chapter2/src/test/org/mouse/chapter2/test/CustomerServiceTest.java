@@ -23,9 +23,11 @@ public class CustomerServiceTest {
         this.customerService = new CustomerService();
     }
 
+
+
     @Before
     public void init(){
-        //TODO
+        DateBaseHelper.executeSqlFile("sql/customer_init.sql");
     }
 
 
@@ -34,6 +36,7 @@ public class CustomerServiceTest {
     public void getCustomerListTest() throws Exception{
         List<Customer> customerList = customerService.getCustomerList(null);
         Assert.assertEquals(2,customerList.size());
+
     }
 
     @Test

@@ -24,4 +24,9 @@ public class StringUtil {
         return !isEmpty(str);
     }
 
+
+    public static  String[] spiltString(String str,String patter){
+        return str.split(patter);
+    }
+
 }

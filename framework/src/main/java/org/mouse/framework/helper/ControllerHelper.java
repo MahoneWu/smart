@@ -2,7 +2,7 @@ package org.mouse.framework.helper;
 
 import org.mouse.framework.annotation.Action;
 import org.mouse.framework.annotation.Controller;
-import org.mouse.framework.bean.Hander;
+import org.mouse.framework.bean.Handler;
 import org.mouse.framework.bean.Request;
 import org.mouse.framework.util.ArrayUtil;
 import org.mouse.framework.util.CollectionUtil;
@@ -18,7 +18,7 @@ import java.util.Set;
 public class ControllerHelper {
 
 
-    private static final Map<Request, Hander> ACTION_MAP = new HashMap<Request, Hander>();
+    private static final Map<Request, Handler> ACTION_MAP = new HashMap<Request, Handler>();
 
     static {
         Set<Class<?>> controllerClassSet = ClassHelper.getControllerClass();
@@ -36,7 +36,7 @@ public class ControllerHelper {
                                     String requestMethod = array[0];
                                     String requestPath = array[1];
                                     Request request = new Request(requestMethod, requestPath);
-                                    Hander hander = new Hander(Controller.class, method);
+                                    Handler hander = new Handler(Controller.class, method);
                                     ACTION_MAP.put(request, hander);
                                 }
                             }
@@ -49,7 +49,7 @@ public class ControllerHelper {
     }
 
 
-    public static Hander getHander(String requestMethod, String requestPath) {
+    public static Handler getHander(String requestMethod, String requestPath) {
         Request request = new Request(requestMethod, requestPath);
         return ACTION_MAP.get(request);
     }

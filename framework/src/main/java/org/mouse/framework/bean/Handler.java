@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 /**
  * Created by Mahone on 2017/8/30.
  */
-public class Hander {
+public class Handler {
 
 
 
@@ -20,7 +20,7 @@ public class Hander {
     private Method actionMethod;
 
 
-    public Hander(Class<?> controllerClass, Method actionMethod) {
+    public Handler(Class<?> controllerClass, Method actionMethod) {
         this.controllerClass = controllerClass;
         this.actionMethod = actionMethod;
     }

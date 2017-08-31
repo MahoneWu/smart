@@ -13,7 +13,7 @@ public class View {
 
     public View(String path){
         this.path = path;
-        model = new HashMap<>();
+        model = new HashMap<String, Object>();
     }
 
 

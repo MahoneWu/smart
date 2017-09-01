@@ -65,7 +65,9 @@ public class ClassUtil {
                 if(null != url){
                     String protocol = url.getProtocol();
                     if(null != protocol && protocol.equals("file")){
+                        logger.info(url.getPath());
                         String packagePath = url.getPath().replaceAll("%20", "");
+                        logger.info(packagePath);
                         addClass(classSet, packagePath, packageName);
                     }else if(null != protocol && protocol.equals("jar")){
                         JarURLConnection jarURLConnection = (JarURLConnection) url.openConnection();
@@ -114,7 +116,7 @@ public class ClassUtil {
             }else{
                 String subPackagePath = fileName;
                 if(StringUtils.isNotEmpty(packagePath)){
-                    subPackagePath = packageName + "/" + subPackagePath;
+                    subPackagePath = packagePath + "/" + subPackagePath;
                 }
                 String subPackageName = fileName;
                 if(StringUtil.isNotEmpty(packageName)){
@@ -133,6 +135,13 @@ public class ClassUtil {
     private static  void doAddClass(Set<Class<?>> classSet , String className){
         Class<?> cls = loadClass(className, false);
         classSet.add(cls);
+    }
+
+
+    public static void main(String[] args) {
+        String url = "file:D /test/ 123 ";
+       String packagePath = url.replaceAll("%20", "");
+        System.out.println(packagePath);
     }
 
 

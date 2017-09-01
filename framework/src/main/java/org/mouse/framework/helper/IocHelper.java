@@ -10,11 +10,9 @@ import java.lang.reflect.Field;
 import java.util.Map;
 
 /**
- * Created by xn066797 on 2017/8/30.
+ * Created by Mahone on 2017/8/30.
  */
 public class IocHelper {
-
-
     static {
         //获取所有的bean类与Bean实例之间的映射关系
         Map<Class<?>, Object> beanMap = BeanHelper.getBeanMap();
@@ -38,8 +36,5 @@ public class IocHelper {
                 }
             }
         }
-
     }
-
-
 }

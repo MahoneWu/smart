@@ -6,9 +6,6 @@ import java.lang.reflect.Method;
  * Created by Mahone on 2017/8/30.
  */
 public class Handler {
-
-
-
     /**
      * controller
      */

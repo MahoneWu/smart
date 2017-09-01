@@ -1,5 +1,6 @@
 package org.mouse.framework;
 
+import org.mouse.framework.bean.Data;
 import org.mouse.framework.bean.Handler;
 import org.mouse.framework.bean.Param;
 import org.mouse.framework.bean.View;
@@ -18,7 +19,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,19 +53,19 @@ public class DispatcherServlet extends HttpServlet {
 
 
     public void service(HttpServletRequest request, HttpServletResponse response)throws ServletException,IOException {
-
+        //获取请求方法与请求路径
         String requestMethod = request.getMethod().toLowerCase();
 
         String requestPath = request.getPathInfo();
-
+        //获取action处理器
         Handler handler = ControllerHelper.getHander(requestMethod,requestPath);
 
         if(null != handler){
-
+            //获取Controller类及其Bean实列
             Class<?> controllerClass = handler.getControllerClass();
 
             Object controllerBean = BeanHelper.getBean(controllerClass);
-
+            //创建请求参数对象
             Map<String, Object> paramMap = new HashMap<String, Object>();
 
             Enumeration<String> paramNames = request.getParameterNames();
@@ -88,25 +91,42 @@ public class DispatcherServlet extends HttpServlet {
                     }
                 }
             }
-
             Param param = new Param(paramMap);
+            //调用action方法
             Method actionMethod = handler.getActionMethod();
             Object result = ReflectionUtil.invokeMethod(controllerBean, actionMethod, param);
-
+            //处理Action方法返回值
             if(request instanceof View){
+                //返回jsp页面
+                View view = (View) result;
+                String path = view.getPath();
+                if(StringUtil.isNotEmpty(path)){
+                    if(path.startsWith("/")){
+                        response.sendRedirect(request.getContextPath() + path);
+                    }else {
+                        Map<String, Object> model = view.getModel();
 
+                        for (Map.Entry<String, Object> entry : model.entrySet()) {
+                            request.setAttribute(entry.getKey(), entry.getValue());
+                        }
+                        request.getRequestDispatcher(ConfigHelper.getAppJspPath() + path).forward(request, response);
+                    }
+                }else if(result instanceof Data){
+                    Data data = (Data) result;
+                    Object model = data.getModel();
+                    if(null != model){
+                        response.setContentType("application/json");
+                        response.setCharacterEncoding("UTF-8");
+                        PrintWriter writer = response.getWriter();
+                        String json = JsonUtil.toJson(model);
+                        writer.write(json);
+                        writer.flush();
+                        writer.close();
+                    }
+                }
             }
-
-
-
         }
-
-
-
-
     }
-
-
 
 
 }

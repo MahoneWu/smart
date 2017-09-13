@@ -1,7 +1,7 @@
 package org.mouse.test.staticproxy;
 
 /**
- * Created by xn066797 on 2017/9/1.
+ * Created by Mahone on 2017/9/1.
  */
 public interface Hello {
 

@@ -12,6 +12,7 @@ public class Main {
         //CGLlibProxy cgLlibProxy = new CGLlibProxy();
         Hello helloProxy = CGLlibProxy.getInstance().getProxy(HelloImpl.class);
         helloProxy.say("mahone");
+        helloProxy.count();
     }
 
 }

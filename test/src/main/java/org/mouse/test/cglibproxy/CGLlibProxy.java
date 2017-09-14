@@ -31,6 +31,7 @@ public class CGLlibProxy implements MethodInterceptor {
     public Object intercept(Object obj, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
         before();
         Object result = methodProxy.invokeSuper(obj, args);
+        System.out.println("result = "+ result);
         after();
         return result;
     }

@@ -12,7 +12,9 @@ public class HelloProxy implements Hello{
     }
 
 
-
+    public int count() {
+        return 1;
+    }
 
     public void say(String name) {
 

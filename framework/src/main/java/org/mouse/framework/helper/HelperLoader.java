@@ -9,7 +9,7 @@ public class HelperLoader {
 
 
     public static void init() {
-        Class<?>[] classList = {ClassHelper.class,BeanHelper.class,IocHelper.class,ControllerHelper.class};
+        Class<?>[] classList = {ClassHelper.class,BeanHelper.class,AopHelper.class,IocHelper.class,ControllerHelper.class};
 
         for(Class<?> clz : classList){
             ClassUtil.loadClass(clz.getName(), false);

@@ -7,4 +7,6 @@ public interface Hello {
 
     void say(String name);
 
+    int count();
+
 }

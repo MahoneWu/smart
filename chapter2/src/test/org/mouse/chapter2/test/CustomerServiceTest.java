@@ -3,8 +3,11 @@ package org.mouse.chapter2.test;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mouse.chapter2.helper.DateBaseHelper;
 import org.mouse.chapter2.model.Customer;
 import org.mouse.chapter2.service.CustomerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +19,9 @@ import java.util.Map;
 public class CustomerServiceTest {
 
 
+    public static final Logger logger = LoggerFactory.getLogger(CustomerServiceTest.class);
+
+
     private final CustomerService customerService;
 
 
@@ -25,7 +31,7 @@ public class CustomerServiceTest {
 
 
 
-    @Before
+    //@Before
     public void init(){
         DateBaseHelper.executeSqlFile("sql/customer_init.sql");
     }
@@ -78,6 +84,17 @@ public class CustomerServiceTest {
 
 
 
+
+    @Test
+    public void testlogger(){
+        try{
+            double  i =  1 / 0;
+            logger.info("123");
+        }catch (Exception e){
+            logger.debug("--"+e);
+            logger.error("--"+e);
+        }
+    }
 
 
 

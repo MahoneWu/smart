@@ -1,13 +1,12 @@
-package org.mouse.chapter2.helper;
+package org.mouse.framework.helper;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
-import org.mouse.chapter2.model.Customer;
-import org.mouse.chapter2.util.CollectionUtil;
-import org.mouse.chapter2.util.PropsUtil;
+import org.mouse.framework.util.CollectionUtil;
+import org.mouse.framework.util.PropsUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +15,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +24,9 @@ import java.util.Properties;
 /**
  * Created by Mahone Wu on 2017/8/25.
  */
-public class DateBaseHelper {
+public class DatebaseHelper {
 
-    public static final Logger logger = LoggerFactory.getLogger(DateBaseHelper.class);
+    public static final Logger logger = LoggerFactory.getLogger(DatebaseHelper.class);
 
 
     private static final QueryRunner QUERY_RUNNER ;
@@ -257,6 +255,67 @@ public class DateBaseHelper {
             e.printStackTrace();
         }
     }
+
+
+    /**
+     * 开启事物
+     */
+    public static void beginTransaction(){
+        Connection connection = getConnection();
+
+        if(null != connection){
+            try {
+                connection.setAutoCommit(false);
+            } catch (SQLException e) {
+                logger.error("begin transaction failure",e);
+                throw new RuntimeException(e);
+            }finally {
+                CONNECTION_HOLDER.set(connection);
+            }
+        }
+    }
+
+
+    /**
+     * 提交事物
+     */
+    public static void commitTransaction(){
+        Connection connection = getConnection();
+
+        if(null != connection){
+            try {
+                connection.commit();
+                connection.close();
+            } catch (SQLException e) {
+                logger.error("commit transaction failure",e);
+                throw new RuntimeException(e);
+            }finally {
+                CONNECTION_HOLDER.remove();
+            }
+        }
+    }
+
+
+    /**
+     * 回滚事物
+     */
+    public static void rollbackTransaction(){
+        Connection connection = getConnection();
+        if(null != connection){
+            try {
+                connection.rollback();
+                connection.close();
+            } catch (SQLException e) {
+                logger.error("rollback transaction failure",e);
+                throw new RuntimeException(e);
+            }finally {
+                CONNECTION_HOLDER.remove();
+            }
+        }
+    }
+
+
+
 
 
 }

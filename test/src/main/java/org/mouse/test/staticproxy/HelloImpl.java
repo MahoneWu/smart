@@ -1,7 +1,5 @@
 package org.mouse.test.staticproxy;
 
-import jdk.internal.org.objectweb.asm.Handle;
-
 /**
  * Created by Mahone Wu on 2017/9/1.
  */

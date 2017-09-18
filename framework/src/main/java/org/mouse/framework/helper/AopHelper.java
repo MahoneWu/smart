@@ -1,6 +1,8 @@
 package org.mouse.framework.helper;
 
 import org.mouse.framework.annotation.Aspect;
+import org.mouse.framework.annotation.Service;
+import org.mouse.framework.annotation.Transaction;
 import org.mouse.framework.proxy.AspectProxy;
 import org.mouse.framework.proxy.Proxy;
 import org.mouse.framework.proxy.ProxyManager;
@@ -51,6 +53,27 @@ public class AopHelper {
      */
     private static Map<Class<?> ,Set<Class<?>>> createProxyMap() throws  Exception{
         Map<Class<?>, Set<Class<?>>> proxyMap = new HashMap<>();
+        addAspectProxy(proxyMap);
+        addTransaction(proxyMap);
+        return proxyMap;
+    }
+
+
+    /**
+     * 添加事物
+     * @param proxyMap
+     */
+    public static void addTransaction(Map<Class<?>, Set<Class<?>>> proxyMap) {
+        Set<Class<?>> serviceClass = ClassHelper.getClassSetByAnnotation(Service.class);
+        proxyMap.put(Transaction.class,serviceClass);
+    }
+
+    /**
+     * aop代理
+     * @param proxyMap
+     * @throws Exception
+     */
+    public static void addAspectProxy(Map<Class<?>, Set<Class<?>>> proxyMap) throws Exception{
         Set<Class<?>> proxyClassSet = ClassHelper.getClassSetBySuper(AspectProxy.class);
         for(Class<?> proxyClass : proxyClassSet){
             if(proxyClass.isAnnotationPresent(Aspect.class)){
@@ -59,7 +82,6 @@ public class AopHelper {
                 proxyMap.put(proxyClass, targetClassSet);//代理类，和目标类对象集合
             }
         }
-        return proxyMap;
     }
 
 

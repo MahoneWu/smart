@@ -11,7 +11,7 @@
     <modules>
         <module>chapter1</module>
         <module>chapter2</module>
-        <module>framework</module>
+         <module>framework</module>
         <module>chapter3</module>
         <module>test</module>
     </modules>

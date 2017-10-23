@@ -23,7 +23,6 @@ public class TransactionProxy implements Proxy {
     };
 
 
-    @Override
     public Object doProxy(ProxyChain proxyChain) throws Throwable {
 
         Object result;

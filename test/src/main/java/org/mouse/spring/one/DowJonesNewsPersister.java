@@ -6,10 +6,9 @@ package org.mouse.spring.one;
  * @author wuhao Mahone Wu
  * @date 2017/10/19
  */
-public class DowJonesNewsPersister implements IFNewsPersister {
+public class DowJonesNewsPersister implements IFXNewsPersister {
 
-    @Override
-    public void storeNews() {
-
+    public void persistNews(FXNewsBean newsBean) {
+        System.out.println("store in database");
     }
 }

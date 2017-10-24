@@ -6,10 +6,10 @@ package org.mouse.spring.one;
  * @author wuhao Mahone Wu
  * @date 2017/10/19
  */
-public interface IFNewsPersister {
+public interface IFXNewsPersister {
 
 
-    public void storeNews();
+    public void persistNews(FXNewsBean newsBean);
 
 
 }

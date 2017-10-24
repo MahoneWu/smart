@@ -8,7 +8,24 @@
 			http://www.springframework.org/schema/context
 			http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-    <!--<bean id="" class=""></bean>-->
+  <bean id="djNewProvider" class="org.mouse.spring.one.FXNewsProvider" scope="prototype">
+      <constructor-arg index="0">
+          <ref bean="djNewsListener"/>
+      </constructor-arg>
+      <constructor-arg index="1">
+          <ref bean="djNewsPersister"/>
+      </constructor-arg>
+  </bean>
+<!--
+    <bean id="djNewProvider" class="org.mouse.spring.one.FXNewsProvider">
+        <property name="newsListener">
+            <ref bean="djNewsListener"/>
+        </property>
+        <property name="newsPersister">
+            <ref bean="djNewsPersister"/>
+        </property>
+    </bean>-->
 
-
+    <bean id="djNewsPersister" class="org.mouse.spring.one.DowJonesNewsPersister" />
+    <bean id="djNewsListener" class="org.mouse.spring.one.DowJonesNewsListener"/>
 </beans>

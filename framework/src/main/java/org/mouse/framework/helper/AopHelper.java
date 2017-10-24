@@ -52,7 +52,7 @@ public class AopHelper {
      * @throws Exception
      */
     private static Map<Class<?> ,Set<Class<?>>> createProxyMap() throws  Exception{
-        Map<Class<?>, Set<Class<?>>> proxyMap = new HashMap<>();
+        Map<Class<?>, Set<Class<?>>> proxyMap = new HashMap<Class<?>, Set<Class<?>>>();
         addAspectProxy(proxyMap);
         addTransaction(proxyMap);
         return proxyMap;
@@ -86,7 +86,7 @@ public class AopHelper {
 
 
     private static  Map<Class<?> ,List<Proxy>> createTargetMap(Map<Class<?>,Set<Class<?>>> proxyMap) throws Exception{
-        Map<Class<?>, List<Proxy>> targetMap = new HashMap<>();
+        Map<Class<?>, List<Proxy>> targetMap = new HashMap<Class<?>, List<Proxy>>();
         for(Map.Entry<Class<?> ,Set<Class<?>>> proxyEntry : proxyMap.entrySet()){
             Class<?> proxyClass = proxyEntry.getKey();
             Set<Class<?>> targetClassSet = proxyEntry.getValue();
@@ -95,7 +95,7 @@ public class AopHelper {
                 if(targetMap.containsKey(targetClass)){
                     targetMap.get(targetClass).add(proxy);
                 }else{
-                    List<Proxy> proxyList = new ArrayList<>();
+                    List<Proxy> proxyList = new ArrayList<Proxy>();
                     proxyList.add(proxy);
                     targetMap.put(targetClass, proxyList);
                 }

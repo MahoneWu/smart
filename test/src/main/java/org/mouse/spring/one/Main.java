@@ -2,6 +2,8 @@ package org.mouse.spring.one;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.core.io.*;
 
 import java.io.FileNotFoundException;
@@ -15,7 +17,7 @@ import java.io.FileNotFoundException;
 public class Main {
 
     public static void main(String[] args)throws Exception {
-        BeanFactory container = new XmlBeanFactory(new ClassPathResource("one/one.xml"));
+        BeanFactory container = new XmlBeanFactory(new ClassPathResource("conf/one/one.xml"));
 
         FXNewsProvider fxNewsProvider1 = (FXNewsProvider) container.getBean("djNewProvider");
         fxNewsProvider1.getAndPersisterNews();
@@ -48,6 +50,8 @@ public class Main {
         }
 
 
+        ApplicationContext ctx = new FileSystemXmlApplicationContext("conf/one/one.xml");
+        System.out.println("djNewsPersister");
 
     }
 

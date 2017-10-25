@@ -14,12 +14,16 @@ public class MainOne {
 
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("conf/two/two.xml");
-        HelloService helloService = context.getBean("helloService",HelloService.class);
-        helloService.say("hello world!!!");
+        //HelloService helloService = context.getBean("helloService",HelloService.class);
+        //helloService.say("hello world!!!");
 
-        ProxyFactoryBean factoryBean = context.getBean("&helloServiceBean", ProxyFactoryBean.class);
-        HelloService hs = (HelloService) factoryBean.getObject();
-        hs.say("yoyo!!!");
+        //ProxyFactoryBean factoryBean = context.getBean("&helloServiceBean", ProxyFactoryBean.class);
+        //HelloService hs = (HelloService) factoryBean.getObject();
+        //hs.say("yoyo!!!");
+
+        ProxyFactoryBean factoryBeanService = context.getBean("helloServiceBean", ProxyFactoryBean.class);
+        HelloService hss = (HelloService) factoryBeanService.getObject();
+        hss.say("kkk");
     }
 
 }

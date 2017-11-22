@@ -21,9 +21,12 @@ public class MainOne {
         //HelloService hs = (HelloService) factoryBean.getObject();
         //hs.say("yoyo!!!");
 
-        ProxyFactoryBean factoryBeanService = context.getBean("helloServiceBean", ProxyFactoryBean.class);
-        HelloService hss = (HelloService) factoryBeanService.getObject();
-        hss.say("kkk");
+//        ProxyFactoryBean factoryBeanService = context.getBean("helloServiceBean", ProxyFactoryBean.class);
+//        HelloService hss = (HelloService) factoryBeanService.getObject();
+//        hss.say("kkk");
+
+        HelloService factoryBeanObject = (HelloService)context.getBean("helloServiceBean");
+        factoryBeanObject.say("object");
     }
 
 }

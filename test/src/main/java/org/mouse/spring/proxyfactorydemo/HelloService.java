@@ -1,4 +1,4 @@
-package org.mouse.spring.two;
+package org.mouse.spring.proxyfactorydemo;
 
 /**
  * hello
@@ -10,6 +10,6 @@ public interface HelloService {
 
     public void say(String thing);
 
-    public String getName(int id);
+    public String execute(int id);
 
 }

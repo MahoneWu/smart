@@ -1,6 +1,4 @@
-package org.mouse.spring.two;
-
-import org.springframework.util.ObjectUtils;
+package org.mouse.spring.proxyfactorydemo;
 
 /**
  * hello
@@ -8,10 +6,10 @@ import org.springframework.util.ObjectUtils;
  * @author wuhao Mahone Wu
  * @date 2017/10/25
  */
-public class HelloServiceImpl implements  HelloService {
+public class HelloServiceImpl implements HelloService {
 
 
-    public void setBasenames(String ...basenames){
+    /*public void setBasenames(String ...basenames){
         dealName(basenames);
     }
 
@@ -22,7 +20,7 @@ public class HelloServiceImpl implements  HelloService {
                 System.out.println(names[i]);
             }
         }
-    }
+    }*/
 
     @Override
     public void say(String thing) {
@@ -31,9 +29,9 @@ public class HelloServiceImpl implements  HelloService {
 
 
     @Override
-    public String getName(int id) {
+    public String execute(int id) {
         String name = "Mahone Wu-";
-        System.out.println(name+id);
+        System.out.println(name + id);
         return name;
     }
 }

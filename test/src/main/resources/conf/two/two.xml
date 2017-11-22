@@ -18,13 +18,33 @@
   </bean>
 
 
-    <bean id="helloServiceBean" class="org.springframework.aop.framework.ProxyFactoryBean">
+   <!-- <bean id="helloServiceBean" class="org.springframework.aop.framework.ProxyFactoryBean">
         <property name="proxyInterfaces">
             <list>
                 <value>org.mouse.spring.two.HelloService</value>
             </list>
         </property>
         <property name="targetName" value="helloService" />
+    </bean>-->
+
+
+    <bean id="proxyService" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="interceptorNames">
+            <value>adviser</value>
+        </property>
+        <property name="targetName" value="helloService" />
+    </bean>
+
+
+    <bean id="testAfterReturnAdvice" class="org.mouse.spring.advice.TestAfterReturnAdvice"/>
+
+
+    <!-- 切入点adviser -->
+    <bean id="adviser" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="advice" ref="testAfterReturnAdvice"></property>
+        <!-- pattern的值使用正则表达式精确指定切入点 ,将print方法设为切入点 -->
+        <property name="pattern"
+                  value="org\.mouse\.spring\.two\.HelloServiceImpl\.getName"></property>
     </bean>
 
 </beans>
